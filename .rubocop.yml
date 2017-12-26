@@ -1,0 +1,27 @@
+    inherit_from: .rubocop_todo.yml
+
+    AllCops:
+      Include:
+        - '**/Gemfile'
+      Exclude:
+        - 'tmp/**/*'
+        - 'vendor/**/*'
+        - config/**/*
+        - db/**/*
+        - bin/**/*
+        - node_modules/**/*
+        - Rakefile
+        - Guardfile
+      TargetRubyVersion: 2.4
+
+    Rails:
+      Enabled: true
+
+    Documentation:
+      Enabled: false
+
+    Metrics/BlockLength:
+      Enabled: false
+
+    Style/FrozenStringLiteralComment:
+      Enabled: false
