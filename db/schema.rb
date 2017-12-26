@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171226203015) do
+ActiveRecord::Schema.define(version: 20171226204808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,22 @@ ActiveRecord::Schema.define(version: 20171226203015) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "company_department_fields", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_department_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_department_id"], name: "index_company_department_fields_on_company_department_id"
+  end
+
+  create_table "company_departments", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_departments_on_company_id"
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -53,5 +69,7 @@ ActiveRecord::Schema.define(version: 20171226203015) do
   end
 
   add_foreign_key "branches", "companies"
+  add_foreign_key "company_department_fields", "company_departments"
+  add_foreign_key "company_departments", "companies"
   add_foreign_key "contacts", "branches"
 end
