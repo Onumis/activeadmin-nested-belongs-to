@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171226202859) do
+ActiveRecord::Schema.define(version: 20171226203015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,4 +29,29 @@ ActiveRecord::Schema.define(version: 20171226202859) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "branches", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_branches_on_company_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.bigint "branch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_contacts_on_branch_id"
+  end
+
+  add_foreign_key "branches", "companies"
+  add_foreign_key "contacts", "branches"
 end
