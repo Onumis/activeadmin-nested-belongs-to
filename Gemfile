@@ -64,3 +64,5 @@ group :development do
   gem 'bundler-audit', require: false
   gem 'traceroute'
 end
+
+gem 'activeadmin', '~> 1.2'
